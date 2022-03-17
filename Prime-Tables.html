@@ -14,7 +14,7 @@
     <script>
         function mainFunction() {
             const inputNumber = document.getElementById("number").value;
-            console.log(isPrimeNumber(inputNumber));
+            testIsPrimeNumber();
         }
 
 
@@ -52,6 +52,65 @@
             }
 
             return true;
+        }
+
+
+        /*
+            Get an array of ordered prime numbers upto the prime number
+            after the nth prime number.
+         */
+        function getNPrimeNumbers(n) {
+
+            const primeNumbers = [];
+
+            // n must be at least 1, so 1 is automatically added to the array.
+            primeNumbers[0] = 1;
+
+            // Because we already have 1 in the array the first number that will be checked is 2.
+            let currentNumber = 2;
+
+            /*
+                Check if the current number is a prime until the array stores the right amount
+                of prime numbers.
+             */
+            while (primeNumbers.length < Number(n)+1) {
+                if (isPrimeNumber(currentNumber)) {
+                    primeNumbers[primeNumbers.length] = currentNumber;
+                }
+
+                currentNumber++;
+            }
+
+            return primeNumbers;
+        }
+
+
+        //TESTS
+
+        function assert(condition) {
+            if(condition) {
+                console.log("PASSED");
+            } else {
+                console.log("FAILED");
+            }
+        }
+
+        function testIsPrimeNumber(){
+            assert((isPrimeNumber(1) === true));
+            assert((isPrimeNumber(2) === true));
+            assert((isPrimeNumber(3) === true));
+            assert((isPrimeNumber(5) === true));
+            assert((isPrimeNumber(139) === true));
+            assert((isPrimeNumber(211) === true));
+            assert((isPrimeNumber(409) === true));
+
+            assert((isPrimeNumber(4) === false));
+            assert((isPrimeNumber(63) === false));
+            assert((isPrimeNumber(27) === false));
+            assert((isPrimeNumber(468) === false));
+            assert((isPrimeNumber(957) === false));
+            assert((isPrimeNumber(789) === false));
+            assert((isPrimeNumber(573) === false));
         }
 
     </script>
