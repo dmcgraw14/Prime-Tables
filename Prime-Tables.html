@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Prime Tables</title>
 </head>
 <body>
+    <div>
+        <label>Enter a whole number:</label>
+        <input type="number" id="number">
+        <input type="button" onclick="mainFunction()" value="Submit">
+    </div>
+
+    <script>
+        function mainFunction() {
+            const inputNumber = document.getElementById("number").value;
+            console.log(inputNumber);
+        }
+    </script>
 
 </body>
 </html>
