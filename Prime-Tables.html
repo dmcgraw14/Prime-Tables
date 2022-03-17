@@ -57,7 +57,7 @@
                 n cannot be divided by a whole number smaller than half of n with a remainder
                 of 0 so the boundary is set to n/2.
              */
-            for (let i = 2; i < n/2; i++) {
+            for (let i = 2; i <= n/2; i++) {
 
                 if (n % i === 0) {
                     return false;
