@@ -14,18 +14,46 @@
     <script>
         function mainFunction() {
             const inputNumber = document.getElementById("number").value;
-            console.log(inputNumber);
-            console.log(isNumberValid(inputNumber));
+            console.log(isPrimeNumber(inputNumber));
         }
 
 
         /*
             A number is valid if it is a whole number greater or equal to 1.
          */
-        function isNumberValid(number) {
+        function isNumberValid(n) {
 
-            return (number % 1 === 0) && (number >= 1);
+            return (n % 1 === 0) && (n >= 1);
         }
+
+
+        /*
+            Check if a number is prime.
+         */
+        function isPrimeNumber(n) {
+
+            /*
+                Number 1, 2, and 3 are automatically defined as prime.
+             */
+            if (n <= 3) {
+                return true;
+            }
+
+            /*
+                Calculate the remainder of the number being checked, N, divided by
+                every number smaller than it other than 1. If there is a remainder
+                that is equal to 0 then N is not a prime.
+             */
+            for (let i = 2; i < n; i++) {
+
+                if (n % i === 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     </script>
 
 </body>
