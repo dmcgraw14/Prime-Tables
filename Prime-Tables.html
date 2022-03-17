@@ -6,7 +6,9 @@
 </head>
 <body>
     <div>
-        <label for="number">Enter a whole number:</label>
+        <label for="number">Enter a whole number:</label><br>
+        <label id="errMsg"></label>
+        <br>
         <input type="number" id="number">
         <input type="button" onclick="mainFunction()" value="Submit">
     </div>
@@ -14,7 +16,17 @@
     <script>
         function mainFunction() {
             const inputNumber = document.getElementById("number").value;
-            testGetNPrimeNumbers();
+
+            if (isNumberValid(inputNumber)) {
+
+                const primeNumberArr = getNPrimeNumbers(inputNumber);
+                const primeTable = createPrimeTable(primeNumberArr);
+
+                displayPrimeTable(primeTable);
+
+            } else {
+                document.getElementById("errMsg").innerText = "Number not valid!";
+            }
         }
 
 
@@ -22,7 +34,6 @@
             A number is valid if it is a whole number greater or equal to 1.
          */
         function isNumberValid(n) {
-
             return (n % 1 === 0) && (n >= 1);
         }
 
@@ -85,6 +96,91 @@
         }
 
 
+        /*
+            Create a 2D-array, which will be the prime table,
+            using the size and values of the prime number array.
+         */
+        function initPrimeTable(primeArr) {
+
+            const primeTable = [];
+
+            // Make the array the same size as the prime array in both directions
+            for (let i = 0; i < primeArr.length; i++) {
+                primeTable[i] = Array(primeArr.length);
+            }
+
+            // Make the first row the same as the prime array
+            primeTable[0] = primeArr;
+
+            // Make the first column the same as the prime array
+            for (let i = 1; i < primeArr.length; i++) {
+                primeTable[i][0] = primeArr[i];
+            }
+
+            return primeTable;
+        }
+
+
+        /*
+            Create the prime table as a 2D array and calculate the values of each index.
+         */
+        function createPrimeTable(primeArr) {
+
+            const primeTable = initPrimeTable(primeArr);
+
+            /*
+                Start filling in the prime table missing the first row and column of the
+                2D-array as they were filled in during the initPrimeTable.
+             */
+            for (let i = 1; i < primeArr.length; i++) {
+                for (let k = i; k < primeTable.length; k++) {
+                    primeTable[i][k] = primeArr[i]*primeArr[k];
+
+                    // If i is equal to k then the index is on the diagonal and has already been calculated.
+                    if (i !== k) {
+                        primeTable[k][i] = primeTable[i][k];
+                    }
+                }
+            }
+
+            return primeTable;
+        }
+
+
+        /*
+            Display the prime table in a html table.
+         */
+        function displayPrimeTable(primeTable) {
+
+            const body = document.getElementsByTagName("body")[0];
+
+            const table = document.createElement("table");
+            const tableBody = document.createElement("tbody");
+
+
+            for (let i = 0; i < primeTable[0].length; i++) {
+
+                const row = document.createElement("tr");
+
+                for (let k = 0; k < primeTable[0].length; k++) {
+
+                    const item = document.createElement("td");
+                    const itemNumber = document.createTextNode(primeTable[i][k]);
+
+                    item.appendChild(itemNumber);
+                    row.appendChild(item)
+                }
+
+                tableBody.appendChild(row);
+            }
+
+
+            table.appendChild(tableBody);
+            body.appendChild(table);
+            table.setAttribute("border", "1");
+        }
+
+
         //TESTS
 
         function assert(condition) {
@@ -94,6 +190,7 @@
                 console.log("FAILED");
             }
         }
+
 
         function compareArrays(a1, a2) {
 
