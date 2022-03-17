@@ -19,7 +19,10 @@
 
             if (isNumberValid(inputNumber)) {
 
+                // Get the array of prime numbers
                 const primeNumberArr = getNPrimeNumbers(inputNumber);
+
+                // Generate the prime table using the prime number array.
                 const primeTable = createPrimeTable(primeNumberArr);
 
                 displayPrimeTable(primeTable);
