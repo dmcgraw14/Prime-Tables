@@ -17,6 +17,9 @@
         function mainFunction() {
             const inputNumber = document.getElementById("number").value;
 
+            testInitPrimeTable();
+            testCreatePrimeTable();
+
             // If the number entered is valid create the prime table.
             if (isNumberValid(inputNumber)) {
 
@@ -187,7 +190,7 @@
         }
 
 
-        //TESTS
+        //TESTS HELPERS
 
         function assert(condition) {
             if(condition) {
@@ -211,6 +214,37 @@
             }
 
             return true;
+        }
+
+        function compare2dArray(a1, a2) {
+
+            if (a1.length !== a2.length) {
+                return false;
+            }
+
+            if (a1[0].length !== a2[0].length) {
+                return false;
+            }
+
+            for (let i = 0; i < a1.length; i++) {
+                for (let k = 0; k < a1.length; k++) {
+                    if (a1[i][k] !== a2[i][k]) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        //TESTS
+
+        function testIsNumberValid() {
+            assert((isNumberValid(1) === true));
+            assert((isNumberValid(100000000) === true));
+
+            assert((isNumberValid() === false));
+            assert((isNumberValid(0) === false));
         }
 
         function testIsPrimeNumber() {
@@ -243,6 +277,18 @@
             assert(compareArrays(getNPrimeNumbers(2), [1]) === false);
             assert(compareArrays(getNPrimeNumbers(8), ["a", "d"]) === false);
             assert(compareArrays(getNPrimeNumbers(1), []) === false);
+        }
+
+        function testInitPrimeTable() {
+            assert(compare2dArray(initPrimeTable([1]), [[1]]) === true);
+            assert(compare2dArray(initPrimeTable([1, 2]), [[1, 2], [2, ]]) === true);
+            assert(compare2dArray(initPrimeTable([1, 2, 3, 5]), [[1, 2, 3, 5], [2, , , ], [3, , , ], [5, , , ]]) === true);
+        }
+
+        function testCreatePrimeTable() {
+            assert(compare2dArray(createPrimeTable([1]), [[1]]) === true);
+            assert(compare2dArray(createPrimeTable([1, 2]), [[1, 2], [2, 4]]) === true);
+            assert(compare2dArray(createPrimeTable([1, 2, 3, 5]), [[1, 2, 3, 5], [2, 4, 6, 10], [3, 6, 9,15], [5, 10, 15,25]]) === true);
         }
 
     </script>
