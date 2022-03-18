@@ -13,4 +13,4 @@ I wrote a function that mirrors one side of the array across the diagonal that g
 
 After completing the prime number algorithm I looked up a more efficient way to do it, and I believe if I had more
 time I was on the right path and could have come close to the algorithm I found. The algorithm I found had a time complexity of
-O(√n) as it only check if every number less than the √n was a factor of n.
+O(√n) as it only checked if every number less than the √n was a factor of n.
