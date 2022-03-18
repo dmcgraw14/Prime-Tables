@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Prime Tables</title>
 </head>
-<body>
+<body onload="runTests()">
     <div>
         <label for="number">Enter a whole number:</label><br>
         <label id="errMsg"></label>
@@ -16,9 +16,6 @@
     <script>
         function mainFunction() {
             const inputNumber = document.getElementById("number").value;
-
-            testInitPrimeTable();
-            testCreatePrimeTable();
 
             // If the number entered is valid create the prime table.
             if (isNumberValid(inputNumber)) {
@@ -238,6 +235,20 @@
         }
 
         //TESTS
+
+        function runTests() {
+            console.log("TESTS");
+            console.log("TESTING isNumberValid");
+            testIsNumberValid();
+            console.log("TESTING isPrimeNumber");
+            testIsPrimeNumber();
+            console.log("TESTING getNPrimeNumbers");
+            testGetNPrimeNumbers();
+            console.log("TESTING initPrimeTable");
+            testInitPrimeTable();
+            console.log("TESTING createPrimeTable");
+            testCreatePrimeTable();
+        }
 
         function testIsNumberValid() {
             assert((isNumberValid(1) === true));
