@@ -256,6 +256,8 @@
 
             assert((isNumberValid() === false));
             assert((isNumberValid(0) === false));
+            assert((isNumberValid(-1) === false));
+            assert((isNumberValid("e") === false));
         }
 
         function testIsPrimeNumber() {
